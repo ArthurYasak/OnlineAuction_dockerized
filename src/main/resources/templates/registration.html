@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>New user</title>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link href="/css/button.css" rel="stylesheet">
+    <link href="/css/background.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="/css/form.css">
+</head>
+<body>
+
+<div class="container compact">
+
+    <h2>Online auction registration</h2>
+
+    <form method="POST" th:action="@{/register}" th:object="${registerForm}" id="registerForm" >
+
+        <div class="field">
+            <label for="username">Username: </label>
+            <input type="text" th:field="*{username}" name="username" id="username"/>
+            <div class="error" th:if="${#fields.hasErrors('username')}" th:errors="*{username}"></div>
+        </div>
+
+
+        <div class="field">
+            <label for="password">Password: </label>
+            <input type="password" th:field="*{password}" name="password" id="password"/>
+            <div class="error" th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></div>
+        </div>
+
+        <div class="field">
+            <label for="name">Name: </label>
+            <input type="text" th:field="*{name}" name="name" id="name"/>
+            <div class="error" th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></div>
+        </div>
+
+        <div class="field">
+            <label for="surname">Surname: </label>
+            <input type="text" th:field="*{surname}" name="surname" id="surname"/>
+            <div class="error" th:if="${#fields.hasErrors('surname')}" th:errors="*{surname}"></div>
+        </div>
+
+        <div class="field">
+            <label for="age">Age: </label>
+            <input type="number" th:field="*{age}" name="age" id="age"/>
+            <div class="error" th:if="${#fields.hasErrors('age')}" th:errors="*{age}"></div>
+        </div>
+
+        <div class="field">
+            <label for="telephone">Telephone: </label>
+            <input type="text" th:field="*{telephone}" name="telephone" id="telephone"/><br/>
+        </div>
+
+        <div class="field">
+            <label for="email">Email: </label>
+            <input type="text" th:field="*{email}" name="email" id="email"/>
+            <div class="error" th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></div>
+        </div>
+
+        <div class="field">
+            <label for="address">Address: </label>
+            <input type="text" th:field="*{address}" name="address" id="address"/>
+        </div>
+
+        <input type="submit" id="submit" value="Register" disabled="disabled"/>
+
+    </form>
+
+    <hr>
+
+    <form th:class="center" th:action="@{/login}">
+        <button class="back" type="submit"><i class="material-icons">arrow_back</i>Cancel </button>
+    </form>
+
+</div>
+
+<script src="/js/form/registration.js"></script>
+
+</body>
+</html>

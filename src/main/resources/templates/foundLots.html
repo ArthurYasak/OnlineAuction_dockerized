@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Found lots</title>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link href="/css/background.css" rel="stylesheet">
+    <link href="/css/table.css" rel="stylesheet">
+    <link href="/css/tooltip.css" rel="stylesheet">
+    <link href="/css/form.css" rel="stylesheet">
+    <link href="/css/button.css" rel="stylesheet">
+</head>
+<body>
+
+<div class="container">
+
+    <h3>Lots by your request:</h3>
+
+    <table>
+        <tr>
+            <th>Name</th>
+            <th>Type</th>
+            <th>Current price</th>
+            <th>Sell until</th>
+            <th>Last customer</th>
+            <th colspan="2">Action</th>
+        </tr>
+        <tr th:each="lot: ${lots}">
+            <td th:text="${lot.getProperty().getName()}"></td>
+            <td th:text="${lot.property.type}"></td>
+            <td th:text="${lot.currentPrice}"></td>
+            <td th:text="${lot.sellUntil}"></td>
+            <td th:if="${lot.lastCustomer} != null" th:text="${lot.lastCustomer.authorizationData.login}"></td>
+            <td th:unless="${lot.lastCustomer} != null">NOT</td>
+
+            <td class="forButton">
+                <form class="tooltip" th:action="@{/allLots/{id}/newBet(id=${lot.getLotId()})}">
+                    <button type="submit"><i class="material-icons">attach_money</i></button>
+                    <span class="tooltiptext">Make a bet</span>
+                </form>
+            </td>
+
+        </tr>
+    </table>
+
+    <hr/>
+
+    <form th:class="center" th:action="@{/user/allLots}">
+        <button class="back" type="submit"><i class="material-icons">arrow_back</i>Back to all lots</button>
+    </form>
+
+
+</div>
+
+
+
+</body>
+</html>

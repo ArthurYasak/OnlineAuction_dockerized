@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Users</title>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link href="/css/background.css" rel="stylesheet">
+    <link href="/css/table.css" rel="stylesheet">
+    <link href="/css/button.css" rel="stylesheet">
+</head>
+<body>
+
+<div class="container compact">
+    <h2 th:text="${user.authorizationData.login}"></h2>
+    <table>
+        <tr>
+            <th>Id </th>
+            <td th:text="${user.getUserId()}"></td>
+        </tr>
+        <tr>
+            <th>Name </th>
+            <td th:text="${user.userData.name}"></td>
+        </tr>
+        <tr>
+            <th>Surname </th>
+            <td th:text="${user.userData.surname}"></td>
+        </tr>
+        <tr>
+            <th>Age </th>
+            <td th:text="${user.userData.age}"></td>
+        </tr>
+        <tr>
+            <th>Telephone </th>
+            <td th:unless="${user.userData.telephone} == ''" th:text="${user.userData.telephone}"></td>
+            <td th:if="${user.userData.telephone} == ''"> - </td>
+        </tr>
+        <tr>
+            <th>Email </th>
+            <td th:unless="${user.userData.email} == ''" th:text="${user.userData.email}"></td>
+            <td th:if="${user.userData.email} == ''"> - </td>
+        </tr>
+        <tr>
+            <th>Address </th>
+            <td th:unless="${user.userData.address} == ''" th:text="${user.userData.address}"></td>
+            <td th:if="${user.userData.address} == ''"> - </td>
+        </tr>
+    </table>
+    <br>
+    <form th:class="center" th:action="@{/admin/allUsers}">
+        <button class="back" type="submit"><i class="material-icons">arrow_back</i> Back to users</button>
+    </form>
+</div>
+
+</body>
+</html>

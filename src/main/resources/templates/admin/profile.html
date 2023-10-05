@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Admin profile</title>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link href="/css/background.css" rel="stylesheet">
+    <link href="/css/button.css" rel="stylesheet">
+</head>
+<body>
+
+<div class="container middle">
+    <h1 th:text="${username} + '(ADMIN)'">Username</h1>
+
+    <a th:href="@{/user/lots}">
+        <button class="account">Your lots</button>
+    </a>
+
+    <a th:href="@{/user/sold}">
+        <button class="account">Sold lots</button>
+    </a>
+
+    <hr/>
+
+    <a th:href="@{/user/bets}">
+        <button class="account" type="submit">Your bets</button>
+    </a>
+
+    <a th:href="@{/user/buys}">
+        <button class="account" type="submit">Your buys</button>
+    </a>
+
+    <hr/>
+
+    <a th:href="@{/user/allLots}">
+        <button class="account" type="submit">All lots</button>
+    </a>
+
+    <a th:href="@{/admin/allUsers}">
+        <button class="account" type="submit">All users</button>
+    </a>
+
+    <hr/>
+
+    <form th:class="center" th:action="@{/account/logout}">
+        <button class="back" type="submit"><i class="material-icons">person_outline</i>Logout</button>
+    </form>
+
+</div>
+
+</body>
+</html>

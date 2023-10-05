@@ -1,0 +1,29 @@
+version: '3.9'
+services:
+  application:
+    image: app:0.0.1
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "8181:8181"
+    depends_on:
+      - postgres
+    environment:
+      - SERVER_PORT= 8181
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://postgres:5432/AuctionBase
+  postgres:
+    container_name: 'java_postgres'
+    image: 'postgres:15'
+    build:
+      context: ./
+      dockerfile: postgres.Dockerfile
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: 75sdQL57
+      POSTGRES_DB: AuctionBase
+    expose:
+      - "5432"
+    ports:
+      - "5432:5432"
+    command: -p 5432

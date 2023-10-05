@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Lots for guest</title>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link href="/css/button.css" rel="stylesheet">
+    <link href="/css/table.css" rel="stylesheet">
+    <link href="/css/background.css" rel="stylesheet">
+</head>
+<body>
+
+<div class="container">
+    <h1>Lots for sale:</h1>
+    <h3>
+        (<a th:href="@{/login}">Sign in</a> to make a bet)
+    </h3>
+
+    <table>
+        <tr>
+            <th>Name</th>
+            <th>Type</th>
+            <th>Current price</th>
+            <th>Sell until</th>
+            <th>Last customer</th>
+        </tr>
+
+        <tr th:each="lot: ${lots}">
+            <td th:text="${lot.getProperty().getName()}"></td>
+            <td th:text="${lot.property.type}"></td>
+            <td th:text="${lot.currentPrice}"></td>
+            <td th:text="${lot.sellUntil}"></td>
+            <td th:if="${lot.lastCustomer} != null" th:text="${lot.lastCustomer.authorizationData.login}"></td>
+            <td th:unless="${lot.lastCustomer} != null">NOT</td>
+        </tr>
+
+    </table>
+
+    <hr/>
+
+    <form th:class="center" th:action="@{/login}">
+        <button class="back" type="submit"><i class="material-icons">arrow_back</i>Back</button>
+    </form>
+
+</div>
+
+</body>
+</html>

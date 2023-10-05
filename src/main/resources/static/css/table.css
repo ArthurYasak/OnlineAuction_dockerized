@@ -1,0 +1,45 @@
+table, th, td {
+    border: 1px solid;
+}
+
+table {
+    width: 100%;
+    text-align: center;
+}
+
+table.forButton {
+    margin-left: auto;
+    margin-right: auto;
+    width: 45px;
+    border: 0px;
+}
+
+td.forButton {
+    width: 40px;
+    border: 0px;
+}
+
+td {
+    background-color: lightGrey;
+}
+
+th {
+    background-color: lightSkyBlue;
+}
+
+h1 {
+    text-align: center;
+}
+
+table.more {
+    max-height: none;
+    overflow: visible;
+}
+
+.clickable {
+    cursor: pointer;
+}
+
+img[src="data:image/jpg;base64, null"] {
+    display: none;
+}

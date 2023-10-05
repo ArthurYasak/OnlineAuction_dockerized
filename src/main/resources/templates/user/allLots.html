@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>All lots</title>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link href="/css/button.css" rel="stylesheet">
+    <link href="/css/background.css" rel="stylesheet">
+    <link href="/css/table.css" rel="stylesheet">
+    <link href="/css/tooltip.css" rel="stylesheet">
+    <link href="/css/form.css" rel="stylesheet">
+    <link href="/css/modal.css" rel="stylesheet">
+
+    <script type="text/javascript" src="/js/jQuery/jquery_3_7_1.js"></script>
+
+</head>
+<body>
+
+<div  class="container">
+
+    <form th:method="POST" th:action="@{/searchLots}">
+        <input type="text" class="search" name="keyWord"/>
+        <input type="submit" class="search" value="Search lots"/>
+    </form>
+
+    <h1>All lots:</h1>
+
+    <div id="upd">
+        <table>
+            <tr>
+                <th>Photo</th>
+                <th>Name</th>
+                <th>Type</th>
+                <th>Current price</th>
+                <th>Sell until</th>
+                <th>Owner</th>
+                <th>Last customer</th>
+                <th th:if="${hasRoleAdmin}" colspan="2">Action</th>
+                <th th:unless="${hasRoleAdmin}">Action</th>
+
+            </tr>
+            <tr th:each="lot: ${lots}">
+                <td class="clickable" th:data-modal="${lot.lotId}" width="10%">
+                    <img th:src="'data:image/jpg;base64, ' + ${lot.property.getBase64Photo()}" width="100%">
+                </td>
+                <td class="clickable" th:data-modal="${lot.lotId}" th:text="${lot.getProperty().getName()}"></td>
+                <td class="clickable" th:data-modal="${lot.lotId}" th:text="${lot.property.type}"></td>
+                <td class="clickable" th:data-modal="${lot.lotId}" th:text="${lot.currentPrice}"></td>
+                <td class="clickable" th:data-modal="${lot.lotId}" th:text="${lot.sellUntil}"></td>
+                <td class="clickable" th:data-modal="${lot.lotId}" th:text="${lot.userOwner.authorizationData.login}"></td>
+                <td class="clickable" th:data-modal="${lot.lotId}" th:if="${lot.lastCustomer} != null"
+                    th:text="${lot.lastCustomer.authorizationData.login}"></td>
+                <td class="clickable" th:data-modal="${lot.lotId}" th:unless="${lot.lastCustomer} != null">NOT</td>
+
+                <td class="forButton">
+                    <form class="tooltip" th:action="@{/allLots/{id}/newBet(id=${lot.getLotId()})}">
+                        <button type="submit"><i class="material-icons">attach_money</i></button>
+                        <span class="tooltiptext">Make a bet</span>
+                    </form>
+                </td>
+
+                <td class="forButton" th:if="${hasRoleAdmin}">
+                    <form class="tooltip" th:method="DELETE"
+                          th:action="@{/admin/lots/{id}/delete(id = ${lot.getLotId()})}">
+                        <button type="submit" class="delete"><i class="material-icons">delete</i></button>
+                        <span class="tooltiptext">Delete</span>
+                    </form>
+                </td>
+
+
+
+            </tr>
+
+        </table>
+
+    </div>
+
+    <hr/>
+
+    <form th:class="center" th:if="${hasRoleAdmin}" th:action="@{/admin/account}">
+        <button class="back" type="submit"><i class="material-icons">arrow_back</i>Back to profile</button>
+    </form>
+
+    <form th:class="center" th:unless="${hasRoleAdmin}" th:action="@{/user/account}">
+        <button class="back" type="submit"><i class="material-icons back">arrow_back</i> Back to profile</button>
+    </form>
+
+    <!-- The Modal -->
+    <div th:each="lot: ${lots}" th:id="${lot.lotId}" class="modal">
+
+        <!-- Modal content -->
+        <div class="modal-content">
+            <span th:id="close" class="close" >&times;</span>
+            <h2 th:text="${lot.property.name}" ></h2>
+            <table>
+                <tr>
+                    <th>Weight</th>
+                    <th>Size</th>
+                    <th>Description</th>
+                </tr>
+                <tr>
+                    <td th:text="${lot.property.weight}"></td>
+                    <td th:text="${lot.property.size}"></td>
+                    <td th:unless="${lot.property.description} == ''" th:text="${lot.property.description}"></td>
+                    <td th:if="${lot.property.description} == ''"> - </td>
+                </tr>
+            </table>
+            <hr/>
+            <img th:src="'data:image/jpg;base64, ' + ${lot.property.getBase64Photo()}" width="100%" align="center">
+        </div>
+    </div>
+
+</div>
+
+
+
+<script src="/js/allLots.js"></script>
+<script src="/js/table.js"></script>
+
+</body>
+</html>

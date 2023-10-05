@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>User bets</title>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link href="/css/background.css" rel="stylesheet">
+    <link href="/css/table.css" rel="stylesheet">
+    <link href="/css/button.css" rel="stylesheet">
+    <link href="/css/tooltip.css" rel="stylesheet">
+</head>
+<body>
+
+
+
+<div class="container">
+
+    <h1>Your bets:</h1>
+
+    <table>
+        <tr>
+            <th>Photo</th>
+            <th>Name</th>
+            <th>Type</th>
+            <th>Price</th>
+            <th>Lot owner</th>
+            <th>Action</th>
+        </tr>
+        <tr th:each="bet: ${bets}">
+            <td width="10%">
+                <img th:src="'data:image/jpg;base64, ' + ${bet.lot.property.getBase64Photo()}" width="100%">
+            </td>
+            <td th:text="${bet.lot.property.name}"></td>
+            <td th:text="${bet.lot.property.type}"></td>
+            <td th:text="${bet.lot.currentPrice}"></td>
+            <td th:text="${bet.lot.userOwner.authorizationData.login}"></td>
+            <td class="forButton">
+                <form class="tooltip" th:method="DELETE"
+                      th:action="@{/user/bets/{lotId}/delete(lotId = ${bet.lot.getLotId()})}">
+                    <button class="delete" type="submit"><i class="material-icons">delete</i></button>
+                    <span class="tooltiptext">Delete</span>
+                </form>
+            </td>
+        </tr>
+    </table>
+
+    <hr/>
+
+    <a th:if="${hasRoleAdmin}" th:href="@{/admin/account}">
+        <button class="back"><i class="material-icons back">arrow_back</i>Back to profile</button>
+    </a>
+
+    <a th:unless="${hasRoleAdmin}" th:href="@{/user/account}">
+        <button class="back"><i class="material-icons back">arrow_back</i>Back to profile</button>
+    </a>
+
+</div>
+
+</body>
+</html>

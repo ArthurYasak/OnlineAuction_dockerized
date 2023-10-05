@@ -1,0 +1,24 @@
+body {
+    background-color: lightSkyBlue;
+}
+
+* {
+    text-align: center;
+}
+
+/* Add a background color and some padding around content */
+.container {
+    border-radius: 5px;
+    background-color: springGreen;
+    padding: 20px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.container.compact {
+    width: 450px;
+}
+
+.container.middle {
+    width: 75%;
+}

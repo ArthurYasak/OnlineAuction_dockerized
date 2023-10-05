@@ -1,0 +1,18 @@
+<hibernate-configuration>
+    <session-factory>
+
+        <property name="dialect">org.hibernate.dialect.PostgreSQLDialect</property>
+        <property name="connection.driver_class">org.postgresql.Driver</property>
+        <property name="connection.url">jdbc:postgresql://postgres:5432/AuctionBase</property>
+        <property name="connection.username">postgres</property>
+        <property name="connection.password">75sdQL57</property>
+<!--        <property name="hibernate.show_sql">true</property>-->
+<!--        <property name="hibernate.format_sql">true</property>-->
+<!--        jdbc:postgresql://postgres/AuctionBase-->
+        <property name="hibernate.highlight_sql">true</property>
+        <property name="hbm2ddl.auto">update</property>
+
+    </session-factory>
+</hibernate-configuration>
+
+

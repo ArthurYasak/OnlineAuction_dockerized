@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>User buys</title>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link href="/css/background.css" rel="stylesheet">
+    <link href="/css/table.css" rel="stylesheet">
+    <link href="/css/button.css" rel="stylesheet">
+</head>
+<body>
+
+<div class="container">
+    <h1>Your buys:</h1>
+
+    <table>
+        <tr>
+            <th>Photo</th>
+            <th>Name</th>
+            <th>Type</th>
+            <th>Price</th>
+            <th>Owner</th>
+        </tr>
+        <tr th:each="lot: ${lots}">
+            <td width="10%">
+                <img th:src="'data:image/jpg;base64, ' + ${lot.property.getBase64Photo()}" width="100%">
+            </td>
+            <td width="20%" th:text="${lot.getProperty().getName()}"></td>
+            <td th:text="${lot.property.type}"></td>
+            <td th:text="${lot.currentPrice}"></td>
+            <td th:text="${lot.userOwner.authorizationData.login}"></td>
+        </tr>
+    </table>
+
+    <hr/>
+
+    <form th:class="center" th:if="${hasRoleAdmin}" th:action="@{/admin/account}">
+        <button class="back" type="submit"><i class="material-icons">arrow_back</i>Back to profile</button>
+    </form>
+
+    <form th:class="center" th:unless="${hasRoleAdmin}" th:action="@{/user/account}">
+        <button class="back" type="submit"><i class="material-icons back">arrow_back</i> Back to profile</button>
+    </form>
+</div>
+
+</body>
+</html>

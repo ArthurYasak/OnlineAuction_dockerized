@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Online auction authorization</title>
+    <link href="/css/background.css" rel="stylesheet">
+    <link rel="stylesheet" href="/css/form.css">
+    <link rel="stylesheet" href="/css/button.css">
+
+    <script type="text/javascript" src="/js/jQuery/jquery_3_7_1.js"></script>
+
+</head>
+<body>
+
+<div class="container compact">
+
+    <h2>Online auction authorization</h2>
+
+    <div th:if="${param.error}">
+        Unable to login. Check your username and password.
+    </div>
+
+    <div th:if="${param.logout}">
+        You have been logged out.
+    </div>
+
+    <p>New user? Click
+        <a th:href="@{/register}">here</a> to register.</p>
+
+    <form th:action="@{/login}" method="post">
+
+        <input type="text" id="username" class="login" name="username" placeholder="Username"/>
+
+        <input type="password" id="password" class="login" name="password" placeholder="Password"/>
+
+        <div><input type="submit" id="submit" value="Sign in" disabled /></div>
+
+    </form>
+
+    <hr/>
+
+    <a th:href="@{/guest/allLots}">
+        <input class="forGuest" type="submit" value="Sign in as a guest">
+    </a>
+
+</div>
+
+<script src="/js/form/login.js"></script>
+
+</body>
+</html>

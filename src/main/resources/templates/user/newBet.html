@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>New bet</title>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link href="/css/background.css" rel="stylesheet">
+    <link href="/css/form.css" rel="stylesheet">
+    <link href="/css/button.css" rel="stylesheet">
+</head>
+<body>
+
+<div class="container compact">
+    <h3>Create new bet</h3>
+
+    <form method="POST" th:action="@{/allLots/{lotId}/newBet(lotId=${lotIdForBet})}" th:object="${betForm}">
+
+        <div class="field">
+            <label>Price: </label>
+            <input type="number" step="0.1" th:field="*{betPrice}" name="betPrice"/>
+            <div class="error" th:if="${#fields.hasErrors('betPrice')}" th:errors="*{betPrice}"></div>
+        </div>
+
+        <input type="submit"  id="submit" value="Make a bet" disabled="disabled"/>
+
+    </form>
+
+    <hr>
+
+    <form th:class="center" th:action="@{/user/allLots}">
+        <button class="back" type="submit"><i class="material-icons">arrow_back</i>Cancel </button>
+    </form>
+
+</div>
+
+<script src="/js/form/bet.js"></script>
+
+</body>
+</html>

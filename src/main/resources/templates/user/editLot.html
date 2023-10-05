@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Edit lot</title>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link href="/css/button.css" rel="stylesheet">
+    <link href="/css/background.css" rel="stylesheet">
+    <link href="/css/form.css" rel="stylesheet">
+</head>
+<body>
+
+<div class="container compact">
+    <h3>Edit lot</h3>
+
+    <form th:method="PATCH" enctype="multipart/form-data" th:action="@{/lots/{id}(id=${id})}" th:object="${lotForm}" >
+
+        <div class="field">
+            <label>Name: </label>
+            <input type="text" class="readonly" th:field="*{name}" name="name" readonly />
+            <div class="error" th:if="${#fields.hasErrors('name')}" th:errors="*name"></div>
+        </div>
+
+        <div class="field">
+            <label>Type: </label>
+            <input type="text" class="readonly" th:field="*{type}" name="type" readonly />
+            <div class="error" th:if="${#fields.hasErrors('type')}" th:errors="*{type}"></div>
+        </div>
+
+        <div class="field">
+            <label>Weight: </label>
+            <input type="number" th:field="*{weight}" name="weight"/>
+            <div class="error" th:if="${#fields.hasErrors('weight')}" th:errors="*{weight}"></div>
+        </div>
+
+        <div class="field">
+            <label>Size: </label>
+            <input type="number" th:field="*{size}" name="size"/>
+            <div class="error" th:if="${#fields.hasErrors('size')}" th:errors="*{size}"></div>
+        </div>
+
+        <div class="field">
+            <label>Description: </label>
+            <input type="text" th:field="*{description}" name="description"/>
+        </div>
+
+        <div class="field">
+            <label>Sell until: </label>
+            <input type="datetime-local" th:field="*{sellUntil}" name="sellUntil"/><br/>
+            <div class="error" th:if="${#fields.hasErrors('sellUntil')}" th:errors="*{sellUntil}"></div>
+        </div>
+
+        <div class="field">
+            <label>Min price: </label>
+            <input class="readonly" type="number" step = 0.01 th:field="*{minPrice}" name="minPrice" readonly /><br/>
+            <div class="error" th:if="${#fields.hasErrors('minPrice')}" th:errors="*{minPrice}"></div>
+        </div>
+
+        <div class="field">
+            <label>Photo: </label>
+            <input type="file" id="multipartFile" name="multipartFile" th:field="*{multipartFile}">
+            <div class="error" th:if="${#fields.hasErrors('multipartFile')}" th:errors="*{multipartFile}"></div>
+        </div>
+
+        <input type="submit"  id="submit" value="Edit" disabled="disabled"/>
+    </form>
+
+    <hr>
+
+    <form th:class="center" th:action="@{/user/lots}">
+        <button class="back" type="submit"><i class="material-icons">arrow_back</i>Cancel </button>
+    </form>
+</div>
+
+<script src="/js/form/editLot.js"></script>
+
+</body>
+</html>

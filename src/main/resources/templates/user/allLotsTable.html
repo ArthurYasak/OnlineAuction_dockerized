@@ -1,0 +1,42 @@
+<table xmlns:th="http://www.thymeleaf.org">
+    <tr>
+        <th>Photo</th>
+        <th>Name</th>
+        <th>Type</th>
+        <th>Current price</th>
+        <th>Sell until</th>
+        <th>Owner</th>
+        <th>Last customer</th>
+        <th th:if="${hasRoleAdmin}" colspan="2">Action</th>
+        <th th:unless="${hasRoleAdmin}">Action</th>
+    </tr>
+    <tr th:each="lot: ${lots}">
+        <td class="clickable" th:data-modal="${lot.lotId}" width="10%">
+            <img th:src="'data:image/jpg;base64, ' + ${lot.property.getBase64Photo()}" width="100%">
+        </td>
+        <td class="clickable" th:data-modal="${lot.lotId}" th:text="${lot.getProperty().getName()}"></td>
+        <td class="clickable" th:data-modal="${lot.lotId}" th:text="${lot.property.type}"></td>
+        <td class="clickable" th:data-modal="${lot.lotId}" th:text="${lot.currentPrice}"></td>
+        <td class="clickable" th:data-modal="${lot.lotId}" th:text="${lot.sellUntil}"></td>
+        <td class="clickable" th:data-modal="${lot.lotId}" th:text="${lot.userOwner.authorizationData.login}"></td>
+        <td class="clickable" th:data-modal="${lot.lotId}" th:if="${lot.lastCustomer} != null" th:text="${lot.lastCustomer.authorizationData.login}"></td>
+        <td class="clickable" th:data-modal="${lot.lotId}" th:unless="${lot.lastCustomer} != null">NOT</td>
+
+        <td class="forButton">
+            <form class="tooltip" th:action="@{/allLots/{id}/newBet(id=${lot.getLotId()})}">
+                <button type="submit"><i class="material-icons">attach_money</i></button>
+                <span class="tooltiptext">Make a bet</span>
+            </form>
+        </td>
+
+        <td class="forButton" th:if="${hasRoleAdmin}">
+            <form class="tooltip" th:if="${hasRoleAdmin}" th:method="DELETE"
+                  th:action="@{/admin/lots/{id}/delete(id = ${lot.getLotId()})}">
+                <button type="submit" class="delete"><i class="material-icons">delete</i></button>
+                <span class="tooltiptext">Delete</span>
+            </form>
+        </td>
+    </tr>
+</table>
+
+<script src="/js/table.js"></script>

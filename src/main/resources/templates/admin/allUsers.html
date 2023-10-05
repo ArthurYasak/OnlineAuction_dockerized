@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>All users</title>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link href="/css/background.css" rel="stylesheet">
+    <link href="/css/table.css" rel="stylesheet">
+    <link href="/css/button.css" rel="stylesheet">
+    <link href="/css/tooltip.css" rel="stylesheet">
+</head>
+<body>
+
+<div class="container compact">
+
+    <h1>All users:</h1>
+
+    <table>
+        <tr th:each="user : ${users}">
+            <td>
+                <a th:href="@{/admin/user{id}(id=${user.getUserId()})}"
+                   th:text="${user.getUserData().getName()} + ' ' +
+            ${user.getUserData().getSurname()} + ' (' +
+            ${user.getAuthorizationData().getLogin()} + ')'")>user</a>
+            </td>
+
+            <td class="forButton">
+                <form class="tooltip" th:method="DELETE"
+                    th:action="@{/admin/{userId}/delete(userId = ${user.getUserId()})}">
+                    <button class="delete"><i class="material-icons">delete</i></button>
+                    <span class="tooltiptext">Delete</span>
+                </form>
+            </td>
+
+        </tr>
+        <hr/>
+    </table>
+
+    <hr/>
+
+    <form th:class="center" th:action="@{/admin/account}">
+        <button class="back" type="submit"><i class="material-icons">arrow_back</i>Back to profile</button>
+    </form>
+
+</div>
+
+</body>
+</html>

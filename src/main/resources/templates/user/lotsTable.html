@@ -1,0 +1,55 @@
+<div xmlns:th="http://www.thymeleaf.org">
+    <table>
+        <tr>
+            <th>Photo</th>
+            <th>Name</th>
+            <th>Type</th>
+            <th>Current price</th>
+            <th>Sell until</th>
+            <th>Last customer</th>
+            <th colspan="2">Action</th>
+        </tr>
+        <tr th:each="lot: ${lots}">
+            <td class="clickable" th:data-modal="${lot.lotId}" width="10%">
+                <img th:src="'data:image/jpg;base64, ' + ${lot.property.getBase64Photo()}" width="100%">
+            </td>
+            <td class="clickable" th:data-modal="${lot.lotId}" th:text="${lot.getProperty().getName()}"></td>
+            <td class="clickable" th:data-modal="${lot.lotId}" th:text="${lot.property.type}"></td>
+            <td class="clickable" th:data-modal="${lot.lotId}" th:text="${lot.currentPrice}"></td>
+            <td class="clickable" th:data-modal="${lot.lotId}" th:text="${lot.sellUntil}"></td>
+            <td class="clickable" th:data-modal="${lot.lotId}" th:if="${lot.lastCustomer} != null" th:text="${lot.lastCustomer.authorizationData.login}"></td>
+            <td class="clickable" th:data-modal="${lot.lotId}" th:unless="${lot.lastCustomer} != null">NOT</td>
+
+            <td class="forButton">
+                <form class="tooltip" th:action="@{/lots/{id}/edit(id=${lot.getLotId()})}">
+                    <button class="edit" type="submit"><i class="material-icons">edit</i></button>
+                    <span class="tooltiptext">Edit</span>
+                </form>
+            </td>
+
+            <td class="forButton" th:if="${lot.getLastCustomer()} == null">
+                <form class="tooltip"  th:method="DELETE"
+                      th:action="@{/lots/{id}/delete(id = ${lot.getLotId()})}">
+                    <button class="delete" type="submit"><i class="material-icons">delete</i></button>
+                    <span class="tooltiptext">Delete</span>
+                </form>
+            </td>
+
+            <td class="forButton" th:unless="${lot.getLastCustomer()} == null">
+                <form class="tooltip">
+                    <button class="undeletable" type="submit"><i class="material-icons"
+                                                                 aria-disabled="true">delete</i></button>
+                    <span class="tooltiptext">Has a customer</span>
+                </form>
+            </td>
+
+        </tr>
+
+    </table>
+
+</div>
+
+<script src="/js/table.js"></script>
+
+
+

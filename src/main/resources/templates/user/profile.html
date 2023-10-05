@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>User profile</title>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link href="/css/background.css" rel="stylesheet">
+    <link rel="stylesheet" href="/css/button.css">
+    <link rel="stylesheet" href="/css/form.css">
+</head>
+<body>
+
+<div class="container middle">
+
+    <h1 th:text="${username}">Username</h1>
+
+    <a th:href="@{/user/lots}">
+        <button class="account" type="submit">Your lots</button>
+    </a>
+
+    <a th:href="@{/user/sold}">
+        <button class="account" type="submit">Sold lots</button>
+    </a>
+
+    <hr/>
+
+    <a th:href="@{/user/bets}">
+        <button class="account" type="submit">Your bets</button>
+    </a>
+
+    <a th:href="@{/user/buys}">
+        <button class="account" type="submit">Your buys</button>
+    </a>
+
+    <hr/>
+
+    <a th:href="@{/user/allLots}">
+        <button class="account" type="submit">All lots</button>
+    </a>
+
+    <hr/>
+
+    <form th:class="center" th:action="@{/account/logout}">
+        <button class="back" type="submit"><i class="material-icons">person_outline</i>Logout</button>
+    </form>
+
+</div>
+
+</body>
+</html>
