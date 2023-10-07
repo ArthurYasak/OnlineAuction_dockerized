@@ -1,4 +1,5 @@
 version: '3.9'
+
 services:
   application:
     image: app:0.0.1
@@ -11,7 +12,7 @@ services:
       - postgres
     environment:
       - SERVER_PORT= 8181
-      - SPRING_DATASOURCE_URL=jdbc:postgresql://postgres:5432/AuctionBase
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://postgres:5433/AuctionBase
   postgres:
     container_name: 'java_postgres'
     image: 'postgres:15'
@@ -23,7 +24,9 @@ services:
       POSTGRES_PASSWORD: 75sdQL57
       POSTGRES_DB: AuctionBase
     expose:
-      - "5432"
+      - "5433"
     ports:
-      - "5432:5432"
-    command: -p 5432
+      - "5433:5433"
+    command: -p 5433
+    volumes:
+      - C:\postgres_datapart:/var/lib/postgresql/data

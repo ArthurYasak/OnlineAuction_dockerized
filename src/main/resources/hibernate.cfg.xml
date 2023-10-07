@@ -3,7 +3,7 @@
 
         <property name="dialect">org.hibernate.dialect.PostgreSQLDialect</property>
         <property name="connection.driver_class">org.postgresql.Driver</property>
-        <property name="connection.url">jdbc:postgresql://postgres:5432/AuctionBase</property>
+        <property name="connection.url">jdbc:postgresql://postgres:5433/AuctionBase</property>
         <property name="connection.username">postgres</property>
         <property name="connection.password">75sdQL57</property>
 <!--        <property name="hibernate.show_sql">true</property>-->
