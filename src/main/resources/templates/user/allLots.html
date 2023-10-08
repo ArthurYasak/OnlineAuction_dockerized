@@ -54,8 +54,8 @@
                 <td class="clickable" th:data-modal="${lot.lotId}" th:unless="${lot.lastCustomer} != null">NOT</td>
 
                 <td class="forButton">
-                    <form class="tooltip" th:action="@{/allLots/{id}/newBet(id=${lot.getLotId()})}">
-                        <button type="submit"><i class="material-icons">attach_money</i></button>
+                    <form class="tooltip bet" th:action="@{/allLots/{id}/newBet(id=${lot.getLotId()})}">
+                        <button class="bet" type="submit"><i class="material-icons">attach_money</i></button>
                         <span class="tooltiptext">Make a bet</span>
                     </form>
                 </td>

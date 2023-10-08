@@ -1,19 +1,48 @@
 button.edit {
-    background-color: orange;
+    height: 37px;
+    border-radius: 50%;
+    background-color: lightGrey;
+    border: 0px;
+}
+
+button.edit:hover {
+    color: orange;
+    background-color: Grey;
 }
 
 button.delete {
-    background-color: red;
+    height: 37px;
+    border-radius: 50%;
+    background-color: lightGrey;
+    border: 0px;
+}
+
+button.delete:hover {
+    color: red;
+    background-color: Grey;
 }
 
 button.undeletable {
-    background-color: LightPink;
+    background-color: lightGrey;
     color: grey;
-
+    border: 0px;
 }
 
 button.undeletable:hover {
+    color: LightPink;
     cursor: not-allowed;
+}
+
+button.bet {
+    height: 37px;
+    border-radius: 50%;
+    background-color: lightGrey;
+    border: 0px;
+}
+
+button.bet:hover {
+    color: green;
+    background-color: Silver;
 }
 
 button.add {
