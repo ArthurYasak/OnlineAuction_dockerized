@@ -17,9 +17,9 @@ import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
 
-public class MySimpleUrlAuthenticationSuccessHandler implements AuthenticationSuccessHandler {
+public class SimpleUrlAuthenticationSuccessHandler implements AuthenticationSuccessHandler {
 
-    protected Logger logger = LoggerFactory.getLogger(MySimpleUrlAuthenticationSuccessHandler.class);
+    protected Logger logger = LoggerFactory.getLogger(SimpleUrlAuthenticationSuccessHandler.class);
 
     private RedirectStrategy redirectStrategy = new DefaultRedirectStrategy();
 

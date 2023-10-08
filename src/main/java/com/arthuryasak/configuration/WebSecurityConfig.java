@@ -13,7 +13,6 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.security.crypto.password.NoOpPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
@@ -70,7 +69,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter implements W
                 .formLogin()
                 .loginPage("/login")
                 .permitAll()
-                .successHandler(myAuthenticationSuccessHandler())
+                .successHandler(AuthenticationSuccessHandler())
                 .and()
                 .logout().logoutRequestMatcher(new AntPathRequestMatcher("/account/logout"))
                 .logoutSuccessUrl("/login?logout").deleteCookies("JSESSIONID")
@@ -79,8 +78,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter implements W
     }
 
     @Bean
-    public AuthenticationSuccessHandler myAuthenticationSuccessHandler() {
-        return new MySimpleUrlAuthenticationSuccessHandler();
+    public AuthenticationSuccessHandler AuthenticationSuccessHandler() {
+        return new SimpleUrlAuthenticationSuccessHandler();
     }
 
     @Override
