@@ -30,3 +30,5 @@ services:
     command: -p 5433
     volumes:
       - C:\postgres_datapart:/var/lib/postgresql/data
+volumes:
+  database:
