@@ -27,6 +27,7 @@ public class BetsController {
     private final UserService userService;
     private final BetValidator betValidator;
 
+    @Autowired
     public BetsController(BetService betService, LotService lotService, UserService userService, BetValidator betValidator) {
         this.betService = betService;
         this.lotService = lotService;

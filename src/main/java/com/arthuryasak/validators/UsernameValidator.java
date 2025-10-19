@@ -8,7 +8,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.validation.Errors;
 import org.springframework.validation.Validator;
 
-@Service
 @Component
 public class UsernameValidator implements Validator {
     UserService userService;

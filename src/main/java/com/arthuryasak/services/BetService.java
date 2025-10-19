@@ -1,17 +1,20 @@
 package com.arthuryasak.services;
 
+import com.arthuryasak.dao.BetDAO;
 import com.arthuryasak.dao.BetDAOImpl;
 import com.arthuryasak.models.Bet;
 import com.arthuryasak.models.Lot;
 import com.arthuryasak.models.User;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
+@RequiredArgsConstructor
 public class BetService {
 
-    BetDAOImpl betDAO = new BetDAOImpl();
+    private final BetDAO betDAO;
 
     public Bet findById(Integer id) {
         return betDAO.getById(id);

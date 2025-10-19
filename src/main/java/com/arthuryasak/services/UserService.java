@@ -1,9 +1,11 @@
 package com.arthuryasak.services;
 
+import com.arthuryasak.dao.UserDAO;
 import com.arthuryasak.dao.UserDAOImpl;
 import com.arthuryasak.models.Lot;
 import com.arthuryasak.models.Role;
 import com.arthuryasak.models.User;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.HashSet;
@@ -12,20 +14,17 @@ import java.util.Set;
 
 
 @Service
+@RequiredArgsConstructor
 public class UserService {
 
-    private UserDAOImpl usersDAO = new UserDAOImpl();
-
-    public UserService() {
-
-    }
+    private final UserDAO userDAO;
 
     public User findById(int id) {
-        return usersDAO.getById(id);
+        return userDAO.getById(id);
     }
 
     public User findUserByUsername(String username) {
-        return usersDAO.getByUsername(username);
+        return userDAO.getByUsername(username);
     }
 
     public void saveUser(User user) {
@@ -34,24 +33,24 @@ public class UserService {
         Set<Role> roles = new HashSet<>();
         roles.add(userRole);
         user.setUserRoles(roles);
-        usersDAO.add(user);
+        userDAO.add(user);
     }
 
     public void deleteById(Integer id, List<Lot> buyingLots) {
-        usersDAO.deleteById(id);
+        userDAO.deleteById(id);
     }
 
     public User updateUser(User user) {
-        user = usersDAO.update(user);
+        user = userDAO.update(user);
         return user;
     }
 
     public List<User> findAll(int userId) {
-        return usersDAO.getAll(userId);
+        return userDAO.getAll(userId);
     }
 
     public void deleteAll() {
-        usersDAO.deleteAll();
+        userDAO.deleteAll();
     }
 
 }

@@ -19,9 +19,9 @@ import javax.validation.Valid;
 @Log4j2
 public class RegisterController {
 
-    private UserService userService;
-    private PasswordEncoder passwordEncoder;
-    private UsernameValidator usernameValidator;
+    private final UserService userService;
+    private final PasswordEncoder passwordEncoder;
+    private final UsernameValidator usernameValidator;
 
     @Autowired
     public RegisterController(UserService userService, PasswordEncoder passwordEncoder,

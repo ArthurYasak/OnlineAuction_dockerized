@@ -12,4 +12,5 @@ public interface BetDAO {
     void add(Bet bet);
     Bet update(Bet bet);
     void deleteByLotId(int lotId);
+    void deleteByUserId(int userId);
 }

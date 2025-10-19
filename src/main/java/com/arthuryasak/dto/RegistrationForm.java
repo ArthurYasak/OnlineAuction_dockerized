@@ -17,11 +17,14 @@ public class RegistrationForm {
     @Size(min = 2, max = 15,
             message = "Username length should be between 2 and 15 characters")
     private String username;
+
     @NotNull(message = "Password shouldn't be empty")
     private String password;
+
     @Size(min = 2, max = 15,
             message = "Name length should be between 2 and 15 characters")
     private String name;
+
     @Size(min=2, max=15, message = "Surname length should be between 2 and 15 characters")
     private String surname;
 
@@ -30,9 +33,12 @@ public class RegistrationForm {
     private Integer age;
 
     private String telephone;
+
     @Email(message = "Email isn't correct")
     private String email;
+
     private String address;
+
     private byte[] photo;
 
     private static Logger logger = LoggerFactory.getLogger(RegistrationForm.class);

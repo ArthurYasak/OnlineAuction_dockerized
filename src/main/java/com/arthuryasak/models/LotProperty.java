@@ -28,7 +28,8 @@ import java.util.Base64.Encoder;
     @Log4j2
     @Table(name = "lots_properties")
     public class LotProperty implements Serializable {
-        @Id
+
+    @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "property_id")
     private Integer propertyId;

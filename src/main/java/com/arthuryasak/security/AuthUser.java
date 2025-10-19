@@ -7,10 +7,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 @Getter
 public class AuthUser extends org.springframework.security.core.userdetails.User {
-    @NonNull
-    private User user;
 
-    @Autowired
+    @NonNull
+    private final User user;
+
     public AuthUser(User user) {
         super(user.getAuthorizationData().getLogin(),
                 user.getAuthorizationData().getPassword(),

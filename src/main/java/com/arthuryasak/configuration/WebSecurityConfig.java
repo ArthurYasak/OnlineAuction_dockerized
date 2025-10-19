@@ -41,7 +41,6 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter implements W
 
     @Bean
     @Override
-    @Transactional
     public UserDetailsService userDetailsService() {
         return username -> {
             Optional<User> optionalUser = Optional.ofNullable(userService.findUserByUsername(username));

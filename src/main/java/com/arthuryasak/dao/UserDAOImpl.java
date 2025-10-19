@@ -11,12 +11,13 @@ import org.hibernate.query.Query;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Repository;
 
 import java.util.List;
 import java.util.function.Supplier;
 
 
-@Component
+@Repository
 public class UserDAOImpl implements UserDAO {
 
     private static Logger logger = LoggerFactory.getLogger(UserDAOImpl.class);

@@ -14,14 +14,6 @@ import org.springframework.web.bind.annotation.*;
 @Slf4j
 public class AccountController {
 
-    private UserService userService;
-    private LotService lotService;
-
-    public AccountController(UserService userService, LotService lotService) {
-        this.userService = userService;
-        this.lotService = lotService;
-    }
-
     @GetMapping("/account")
     public String showAccount(@AuthenticationPrincipal AuthUser authUser, Model model) {
 

@@ -6,6 +6,7 @@ import com.arthuryasak.models.Lot;
 import com.arthuryasak.services.BetService;
 import com.arthuryasak.services.LotService;
 import lombok.extern.log4j.Log4j2;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.stereotype.Controller;
@@ -24,6 +25,7 @@ public class LotsController {
     private final LotService lotService;
     private final BetService betService;
 
+    @Autowired
     public LotsController(LotService lotService, BetService betService) {
         this.lotService = lotService;
         this.betService = betService;

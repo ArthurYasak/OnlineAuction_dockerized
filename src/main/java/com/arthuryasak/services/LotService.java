@@ -1,17 +1,20 @@
 package com.arthuryasak.services;
 
+import com.arthuryasak.dao.LotDAO;
 import com.arthuryasak.dao.LotDAOImpl;
 import com.arthuryasak.models.Lot;
 import com.arthuryasak.dto.LotForm;
 import com.arthuryasak.models.User;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
+@RequiredArgsConstructor
 public class LotService {
 
-    private LotDAOImpl lotDAO = new LotDAOImpl();
+    private final LotDAO lotDAO;
 
     public List<Lot> findAll() {
         return lotDAO.getAll();

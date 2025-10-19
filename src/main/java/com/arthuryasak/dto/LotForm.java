@@ -28,19 +28,25 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 @Log4j2
 public class LotForm {
+
     @NotEmpty(message = "Name should not be empty")
     @Size(max = 150, message = "Name length can't be more than 150 symbols")
     private String name;
+
     @NotEmpty(message = "Type should not be empty")
     @Size(max = 150, message = "Type length can't be more than 150 symbols")
     private String type;
+
     @NotNull(message = "Weight should not be empty")
     @Min(value = 0, message = "Can't be less than 0")
     private Integer weight;
+
     @NotNull(message = "Size should not be empty")
     @Min(value = 0, message = "Can't be less than 0")
     private Integer size;
+
     private String description;
+
     @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME)
     @NotNull(message = "Date should not be empty")
     @Future(message = "Date must be in the future")
