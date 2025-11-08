@@ -31,6 +31,12 @@ public class BetValidator implements Validator {
 
     public void validate(Object obj, Errors errors) {
         Bet bet = (Bet)obj;
+
+        if (bet.getLot() == null) {
+            errors.rejectValue("betPrice", "label.validate.lotExpired");
+            return;
+        }
+
         Lot lot = lotService.findById(bet.getLot().getLotId());
 
         if (bet.getBetPrice() == null) {
