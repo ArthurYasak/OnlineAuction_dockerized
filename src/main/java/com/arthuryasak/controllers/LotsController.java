@@ -85,12 +85,12 @@ public class LotsController {
         return "/user/buys";
     }
 
-    @GetMapping("newLot")
+    @GetMapping("/newLot")
     public String showLotForm(@ModelAttribute("lotForm") LotForm lotForm) {
         return "/user/newLot";
     }
 
-    @PostMapping("newLot")
+    @PostMapping("/newLot")
     public String addLot(@AuthenticationPrincipal AuthUser authUser,
                          @ModelAttribute("lotForm") @Valid LotForm lotForm,
                          BindingResult result,
