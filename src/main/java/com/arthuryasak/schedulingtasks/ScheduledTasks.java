@@ -1,8 +1,12 @@
 package com.arthuryasak.schedulingtasks;
 
 import com.arthuryasak.models.Lot;
+import com.arthuryasak.models.User;
+import com.arthuryasak.models.UserData;
 import com.arthuryasak.services.BetService;
 import com.arthuryasak.services.LotService;
+import com.arthuryasak.services.delivery.DeliveryService;
+import com.arthuryasak.services.delivery.data.DeliveryRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
@@ -14,11 +18,13 @@ import java.util.List;
 public class ScheduledTasks {
     private final LotService lotService;
     private final BetService betService;
+    private final DeliveryService deliveryService;
 
     @Autowired
-    public ScheduledTasks(LotService lotService, BetService betService) {
+    public ScheduledTasks(LotService lotService, BetService betService, DeliveryService deliveryService) {
         this.lotService = lotService;
         this.betService = betService;
+        this.deliveryService = deliveryService;
     }
 
     @Scheduled(cron = "0 * * * * *")
@@ -27,13 +33,25 @@ public class ScheduledTasks {
         List<Lot> lots = lotService.findAll();
         for(Lot lot: lots) {
             if(lot.getSellUntil().isBefore(LocalDateTime.now()) && !lot.isBought()) {
-                if(lot.getLastCustomer() == null) {
+                User lastCustomer = lot.getLastCustomer();
+                if(lastCustomer == null) {
                     lotService.delete(lot);
                     continue;
                 }
                 lot.setBought(true);
                 lotService.update(lot);
                 betService.deleteByLotId(lot.getLotId());
+
+                UserData customerData = lastCustomer.getUserData();
+                deliveryService.sendDeliveryRequest(DeliveryRequest.builder()
+                        .receiverName(customerData.getName())
+                        .receiverSurname(customerData.getSurname())
+                        .receiverAge(customerData.getAge())
+                        .receiverTelephone(customerData.getTelephone())
+                        .receiverEmail(customerData.getEmail())
+                        .receiverAddress(customerData.getAddress())
+                        .productPhoto(lot.getProperty().getBytePhoto())
+                        .build());
             }
         }
     }
